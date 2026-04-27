@@ -1,8 +1,23 @@
 # AideAdmin Framework Skill
 
+[中文](./readme.md) | [English](./README.en.md)
+
 AideAdmin Framework Skill packages the framework rules as an AI-readable Codex skill for vibe coding. It guides agents to generate Go backend + React PC admin + React H5 business systems with unified API contracts, RBAC/navigation entries, installer-first database setup, customer IM, third-party storage/SMS integrations, security middleware, Docker delivery, and MIT-friendly commercial use.
 
 官网地址：https://aideadmin.com
+
+## English Quick Start
+
+AideAdmin is an AI-native rapid development framework for vibe coding. It defines predictable rules for Go backend services, React PC admin, React H5, installer-first database setup, RBAC/navigation entries, style inheritance, customer IM, third-party storage/SMS integrations, security middleware, Docker delivery, and MIT commercial use.
+
+Install the AI Skill:
+
+```bash
+npm install -g @qianukj/aideadmin-skill
+aideadmin-skill install --force
+```
+
+For complete English documentation, see [README.en.md](./README.en.md).
 
 ## 0. AI Skill 快速使用
 

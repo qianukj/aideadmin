@@ -11,6 +11,7 @@
     "bin/",
     "skill/",
     "readme.md",
+    "README.en.md",
     "LICENSE"
   ],
   "scripts": {
