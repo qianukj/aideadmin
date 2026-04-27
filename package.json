@@ -5,7 +5,7 @@
   "license": "MIT",
   "type": "module",
   "bin": {
-    "aideadmin-skill": "./bin/aideadmin-skill.js"
+    "aideadmin-skill": "bin/aideadmin-skill.js"
   },
   "files": [
     "bin/",
