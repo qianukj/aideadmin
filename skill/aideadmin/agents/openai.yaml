@@ -1,0 +1,4 @@
+interface:
+  display_name: "AideAdmin Framework"
+  short_description: "AI skill for generating AideAdmin + React business systems."
+  default_prompt: "Use AideAdmin Framework to design or implement a Go backend plus React admin/H5 business module following the framework rules."

@@ -1,0 +1,1692 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="AideAdmin Framework 是给 vibe coding 专用的 Go + React 快速开发框架，面向 AI 阅读和协作生成，覆盖 RBAC、顶部导航、图标卡片入口、统一响应、客服 IM、第三方存储短信、导出、日志和代码生成规划。"
+    />
+    <title>AideAdmin Framework 文档</title>
+    <link rel="icon" href="https://cos.qianukj.com/uploads/images/20260428/20260428053943b250d4067.png" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="AideAdmin 文档首页">
+        <span class="brand-mark">
+          <img src="https://cos.qianukj.com/uploads/images/20260428/20260428053943b250d4067.png" alt="AideAdmin logo" />
+        </span>
+        <span class="brand-text">
+          <strong>AideAdmin</strong>
+          <small>Go + React Framework</small>
+        </span>
+      </a>
+
+      <div class="header-actions">
+        <div class="lang-switch" role="group" aria-label="Language switch">
+          <button class="active" type="button" data-lang-switch="zh">中</button>
+          <button type="button" data-lang-switch="en">EN</button>
+        </div>
+        <button class="search-trigger" type="button" data-search-open>搜索文档</button>
+        <button class="menu-button" type="button" aria-label="打开目录" data-menu-button>
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </header>
+
+    <div class="mobile-drawer" data-mobile-drawer>
+      <div class="drawer-panel">
+        <div class="drawer-head">
+          <strong>文档目录</strong>
+          <button type="button" aria-label="关闭目录" data-menu-close>关闭</button>
+        </div>
+        <nav class="drawer-nav" aria-label="移动端目录" data-doc-nav></nav>
+      </div>
+    </div>
+
+    <div class="search-modal" data-search-modal aria-hidden="true">
+      <div class="search-panel" role="dialog" aria-modal="true" aria-label="搜索文档">
+        <div class="search-head">
+          <label for="docSearch">搜索文档</label>
+          <button type="button" data-search-close>关闭</button>
+        </div>
+        <input id="docSearch" type="search" placeholder="输入关键词，例如 RBAC、导出、React、DTO" data-search-input />
+        <div class="search-results" data-search-results></div>
+      </div>
+    </div>
+
+    <main id="top">
+      <div class="docs-layout">
+        <aside class="sidebar">
+          <div class="sidebar-inner">
+            <div class="sidebar-brand">
+              <img src="https://cos.qianukj.com/uploads/images/20260428/20260428053943b250d4067.png" alt="AideAdmin logo" />
+              <div>
+                <strong>AideAdmin</strong>
+                <span>Framework Docs</span>
+              </div>
+            </div>
+            <button class="sidebar-search" type="button" data-search-open>搜索文档</button>
+            <nav class="toc" aria-label="文档目录" data-doc-nav></nav>
+          </div>
+        </aside>
+
+        <article class="doc-content">
+          <section class="hero-section" aria-labelledby="hero-title">
+            <div class="hero-copy">
+              <div class="hero-brand">
+                <img src="https://cos.qianukj.com/uploads/images/20260428/20260428053943b250d4067.png" alt="AideAdmin logo" />
+                <p class="eyebrow">AI Native Dev Framework</p>
+              </div>
+              <h1 id="hero-title">面向业务系统的 Go + React 管理后台框架</h1>
+              <p class="hero-slogan">给 vibe coding 专用的快速开发框架</p>
+              <p class="hero-desc">
+                用固定目录、接口协议、权限模型、SDK 接入和前端约定，把业务系统开发整理成 AI 容易读取、推理和生成的工程上下文。后端使用 Go，PC 管理后台和 H5 移动端统一使用 React。
+              </p>
+
+              <div class="hero-actions">
+                <a class="primary-link" href="#architecture">查看架构设计</a>
+                <a class="secondary-link" href="#business-flow">查看开发流程</a>
+                <a class="secondary-link" href="https://aideadmin.com" rel="noopener">官网</a>
+              </div>
+
+              <dl class="hero-facts" aria-label="框架摘要">
+                <div>
+                  <dt>Backend</dt>
+                  <dd>Go / Gin / GORM</dd>
+                </div>
+                <div>
+                  <dt>Frontend</dt>
+                  <dd>React PC + React H5</dd>
+                </div>
+                <div>
+                  <dt>Auth</dt>
+                  <dd>JWT / Redis / RBAC</dd>
+                </div>
+                <div>
+                  <dt>Mode</dt>
+                  <dd>AI-first Docs</dd>
+                </div>
+              </dl>
+            </div>
+
+            <div class="product-preview" aria-label="AideAdmin 管理后台界面预览">
+              <div class="preview-window">
+                <div class="preview-topbar">
+                  <div class="window-controls">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                  <strong>AideAdmin Console</strong>
+                  <em>Live Preview</em>
+                </div>
+                <div class="preview-body">
+                  <div class="preview-main">
+                    <div class="preview-nav">
+                      <strong>工作台</strong>
+                      <span class="active">总览</span>
+                      <span>业务</span>
+                      <span>系统</span>
+                      <span>报表</span>
+                      <span>运维</span>
+                    </div>
+                    <div class="preview-title">
+                      <div>
+                        <span>Dashboard</span>
+                        <strong>导航图标卡片</strong>
+                      </div>
+                      <small>Go + React</small>
+                    </div>
+                    <div class="preview-app-grid" aria-label="导航图标卡片预览">
+                      <div><span>权</span><strong>权限中心</strong><small>RBAC</small></div>
+                      <div><span>配</span><strong>系统配置</strong><small>Config</small></div>
+                      <div><span>云</span><strong>第三方接入</strong><small>Storage / SMS</small></div>
+                      <div><span>导</span><strong>数据导出</strong><small>Export</small></div>
+                    </div>
+                    <div class="preview-summary">
+                      <div><span>API</span><strong>156</strong><small>统一协议</small></div>
+                      <div><span>权限点</span><strong>64</strong><small>RBAC</small></div>
+                      <div><span>IM 未读</span><strong>18</strong><small>全局浮窗</small></div>
+                    </div>
+                    <div class="preview-workspace">
+                      <div class="preview-table">
+                        <div class="table-row head"><span>模块</span><span>状态</span><span>协议</span></div>
+                        <div class="table-row"><span>RBAC</span><span>启用</span><span>auth.admin/list</span></div>
+                        <div class="table-row"><span>IM</span><span>监测中</span><span>/adminapi/im/ws</span></div>
+                        <div class="table-row"><span>Storage</span><span>多驱动</span><span>COS / OSS / Kodo</span></div>
+                      </div>
+                      <div class="preview-code">
+                        <span>统一响应</span>
+                        <code>{ code: 1, show: 0, msg: "success" }</code>
+                      </div>
+                      <div class="preview-im-dock" aria-label="客服 IM 全局浮窗预览">
+                        <span class="im-pulse"></span>
+                        <div>
+                          <strong>客服浮窗</strong>
+                          <small>3 条新消息</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </section>
+
+          <section id="skill-quickstart" class="doc-section" data-search="AI Skill 快速使用 Codex Claude Code Cursor Windsurf GitHub Copilot AGENTS npm install aideadmin-skill">
+            <p class="section-kicker">AI Skill</p>
+            <h2>0. AI Skill 快速使用</h2>
+            <p>AideAdmin Framework 已封装为 AI Skill，优先给 Codex / Claude Code 这类原生 Skill 软件使用；Cursor、Windsurf、GitHub Copilot 等工具可通过 Rules / Instructions / AGENTS.md 方式接入同一套框架约定。</p>
+            <p>官网地址：<a href="https://aideadmin.com" rel="noopener">https://aideadmin.com</a></p>
+
+            <div class="callout">
+              <strong>推荐安装</strong>
+              <p>全局安装 npm 包后执行安装命令，默认写入 <code>$CODEX_HOME/skills</code>；未设置 <code>CODEX_HOME</code> 时写入 <code>~/.codex/skills</code>。</p>
+            </div>
+
+            <pre><code class="language-bash">npm install -g @qianukj/aideadmin-skill
+aideadmin-skill install --force</code></pre>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>工具</th><th>接入方式</th><th>推荐命令 / 文件</th><th>使用提示</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Codex</td><td>原生 Skill</td><td><code>aideadmin-skill install --force</code></td><td>在 Codex 中直接说：使用 aideadmin 生成业务模块。</td></tr>
+                  <tr><td>Claude Code</td><td>原生 Skill</td><td><code>aideadmin-skill install --path ~/.claude/skills --force</code></td><td>个人 Skill 放 <code>~/.claude/skills</code>，项目 Skill 放 <code>.claude/skills</code>。</td></tr>
+                  <tr><td>Cursor</td><td>Project Rules</td><td><code>.cursor/rules/aideadmin.mdc</code></td><td>把 Skill 核心规则写入规则文件，设置为 Always 或 Agent Requested。</td></tr>
+                  <tr><td>Windsurf</td><td>Workspace Rules / Skills</td><td><code>.windsurf/rules/aideadmin.md</code></td><td>复杂多文件能力可作为 Skill，常规框架约定建议写入 workspace rule。</td></tr>
+                  <tr><td>GitHub Copilot</td><td>Repository Instructions</td><td><code>.github/copilot-instructions.md</code></td><td>把框架约定写入仓库级指令，Copilot Chat 会自动带入上下文。</td></tr>
+                  <tr><td>通用 AI Agent</td><td>AGENTS.md</td><td><code>AGENTS.md</code></td><td>不支持 Skill 的工具统一读取根目录代理说明。</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>主流工具快速接入</h3>
+            <div class="feature-grid">
+              <div>
+                <h3>Codex</h3>
+                <pre><code class="language-bash">npm install -g @qianukj/aideadmin-skill
+aideadmin-skill install --force</code></pre>
+                <p>使用时直接输入：使用 <code>aideadmin</code> 创建文章管理模块。</p>
+              </div>
+              <div>
+                <h3>Claude Code</h3>
+                <pre><code class="language-bash">aideadmin-skill install --path ~/.claude/skills --force
+# 项目共享
+aideadmin-skill install --path .claude/skills --force</code></pre>
+                <p>重启 Claude Code 后自动加载；可用自然语言触发，也可用 <code>/aideadmin</code> 直接调用。</p>
+              </div>
+              <div>
+                <h3>Cursor</h3>
+                <pre><code class="language-text">.cursor/rules/aideadmin.mdc</code></pre>
+                <p>把 Skill 的核心规则写入 Project Rules，适合团队共享后台框架规范。</p>
+              </div>
+              <div>
+                <h3>Windsurf</h3>
+                <pre><code class="language-text">.windsurf/rules/aideadmin.md</code></pre>
+                <p>使用 workspace rule 承载框架约定；如需要脚本和参考文件，再保留 skill 目录作为附件上下文。</p>
+              </div>
+              <div>
+                <h3>GitHub Copilot</h3>
+                <pre><code class="language-text">.github/copilot-instructions.md</code></pre>
+                <p>把“Go 后端 + React 双端 + 安装流程 + 权限模型 + 样式封装”写入仓库指令。</p>
+              </div>
+              <div>
+                <h3>通用 AGENTS.md</h3>
+                <pre><code class="language-text">AGENTS.md</code></pre>
+                <p>给不支持 Skill 的 AI Code 工具使用，保留最短规则：技术栈、目录、接口协议、权限和安全底线。</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="overview-strip" aria-label="框架关键能力">
+            <div class="overview-item">
+              <span>01</span>
+              <strong>AI 可读约定</strong>
+              <p>目录、协议、权限、SDK 都以固定格式描述，方便 AI 理解和生成。</p>
+            </div>
+            <div class="overview-item">
+              <span>02</span>
+              <strong>统一 API 协议</strong>
+              <p>code、show、msg、data 保持前后端一致。</p>
+            </div>
+            <div class="overview-item">
+              <span>03</span>
+              <strong>RBAC 权限模型</strong>
+              <p>顶部导航、图标卡片、按钮和接口权限统一由服务端分发。</p>
+            </div>
+            <div class="overview-item">
+              <span>04</span>
+              <strong>React 双端</strong>
+              <p>PC 管理后台和 H5 共享工程思想与类型定义。</p>
+            </div>
+            <div class="overview-item">
+              <span>05</span>
+              <strong>第三方接入</strong>
+              <p>对象存储和短信统一驱动，业务代码不绑定云厂商。</p>
+            </div>
+            <div class="overview-item">
+              <span>06</span>
+              <strong>客服 IM</strong>
+              <p>H5 快速接入在线客服，PC 使用全局浮窗接待。</p>
+            </div>
+          </section>
+
+          <section id="goals" class="doc-section" data-search="框架目标 Go React REST API 管理员 角色 顶部导航 图标卡片 功能入口 权限 配置 字典 上传 日志 导出 客服IM 第三方存储 短信">
+            <p class="section-kicker">Goal</p>
+            <h2>1. 框架目标</h2>
+            <p>AideAdmin 是一个面向业务系统快速开发的前后端分离管理后台框架，核心目标是：</p>
+            <ul class="check-list">
+              <li>后端使用 Go 提供稳定、清晰、可扩展的 REST API。</li>
+              <li>PC 管理后台和 H5 移动端都使用 React + TypeScript + Vite 构建。</li>
+              <li>内置管理员、角色、顶部导航、图标卡片入口、按钮权限、系统配置、字典、文件上传、操作日志、登录日志、定时任务、数据导出等通用能力。</li>
+              <li>内置客服 IM 能力，支持 H5 快速接入、PC 全局浮窗、消息监测、WebSocket 实时消息和常用话术。</li>
+              <li>内置第三方能力接入层，统一封装腾讯云 COS、阿里云 OSS、七牛云对象存储、腾讯云短信、阿里云短信。</li>
+              <li>保持统一接口协议，让前端导航入口、路由、权限、列表和导出都由服务端规则驱动。</li>
+              <li>保持固定开发路径：建表 -> model -> repository -> service -> controller -> route -> nav-entry -> api -> page。</li>
+            </ul>
+          </section>
+
+          <section id="design-rules" class="doc-section" data-search="框架设计约定 前后端分离 模块化 统一响应 顶部导航 图标卡片 导航入口 功能入口 按钮权限 lists 导出 定时任务 第三方能力 storage sms">
+            <p class="section-kicker">Design Rules</p>
+            <h2>2. 框架设计约定</h2>
+            <p>AideAdmin 的后台系统开发约定：</p>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>能力</th>
+                    <th>设计约定</th>
+                    <th>实现方向</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>前后端分离</td><td>后端只提供 API</td><td>Go 后端只暴露 JSON API，前端独立部署</td></tr>
+                  <tr><td>模块化</td><td>按管理端、公共能力、模型分层</td><td>internal/admin 下按 controller、service、repository、dto、vo 分层</td></tr>
+                  <tr><td>统一响应</td><td>固定 code、show、msg、data</td><td>response.JSON 统一输出</td></tr>
+                  <tr><td>登录认证</td><td>token 放在 header</td><td>JWT + Redis session 双层验证</td></tr>
+                  <tr><td>权限认证</td><td>导航入口、按钮、接口权限统一建模</td><td>RBAC + middleware 权限校验</td></tr>
+                  <tr><td>后台 UE/UX</td><td>黑白简约、内容优先</td><td>类似 ChatGPT 官方 UI 的工具体验：克制配色、清晰层级、低干扰反馈</td></tr>
+                  <tr><td>样式封装</td><td>框架提供统一样式父类和基础组件</td><td>admin、H5、安装向导和生成器页面只继承 / 组合，不重复散写样式</td></tr>
+                  <tr><td>后台导航</td><td>顶部菜单栏 + 导航图标卡片</td><td>模块入口以卡片呈现，脱离传统权限树菜单</td></tr>
+                  <tr><td>动态入口</td><td>服务端返回导航入口，前端转换路由和入口卡片</td><td>入口表保存分组、图标、路由、React 组件路径、权限字符</td></tr>
+                  <tr><td>按钮权限</td><td>服务端返回 perms，前端权限组件 / Hook 控制</td><td>当前管理员权限随 user/info 返回</td></tr>
+                  <tr><td>列表查询</td><td>分页、搜索、排序、导出统一协议</td><td>common/list 定义查询协议和分页响应</td></tr>
+                  <tr><td>导出</td><td>列表接口携带 export 参数</td><td>导出任务生成 xlsx / csv 下载地址</td></tr>
+                  <tr><td>定时任务</td><td>任务统一调度和记录状态</td><td>cron worker + 数据库任务表</td></tr>
+                  <tr><td>客服 IM</td><td>不作为独立导航入口，走全局浮窗</td><td>ImMonitorProvider + WebSocket Gateway + MySQL 消息落库</td></tr>
+                  <tr><td>第三方能力</td><td>业务只依赖统一接口</td><td>storage / sms driver 适配不同云厂商</td></tr>
+                  <tr><td>安装流程</td><td>首次运行不强制检查数据库连接</td><td>进入安装模式，配置数据库后再初始化框架</td></tr>
+                  <tr><td>数据库规范</td><td>所有表名使用统一前缀</td><td>系统、IM 和业务模块表名都由 table_prefix 约束</td></tr>
+                  <tr><td>安全防护</td><td>接口限流、请求防抖、防 SQL 注入、防刷</td><td>Redis 限流 + 前端请求治理 + ORM 参数绑定 + 网关抗压基线</td></tr>
+                  <tr><td>运行交付</td><td>server、admin、h5 三端独立运行和打包</td><td>本地开发、生产构建、Docker 镜像和 Compose 编排都有固定命令</td></tr>
+                  <tr><td>开源许可</td><td>遵循 MIT License</td><td>免费商用、二次开发、私有部署和再分发</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>2.1 后台管理 UE/UX 基线</h3>
+            <p>后台管理端的视觉和交互基线按黑白简约工具界面定义，参考 ChatGPT 官方 UI 的克制、清晰和内容优先表达。AI 生成任何后台页面时必须优先满足以下规则：</p>
+            <div class="feature-grid">
+              <div>
+                <h3>视觉系统</h3>
+                <p>主色只使用黑、白、灰；边框使用浅灰线；阴影只用于浮层、抽屉和少量承载容器；状态色只用于成功、警告、错误等必要反馈。</p>
+                <div class="tag-grid">
+                  <span>#111111</span>
+                  <span>#FFFFFF</span>
+                  <span>#F7F7F5</span>
+                  <span>#DEDED9</span>
+                </div>
+              </div>
+              <div>
+                <h3>布局系统</h3>
+                <p>一级模块使用顶部菜单栏切换；模块首页使用导航图标卡片承载功能入口；列表、表单、详情页以标题区、筛选区、内容区、操作区组织。</p>
+                <div class="tag-grid">
+                  <span>Top Nav</span>
+                  <span>Icon Cards</span>
+                  <span>Content First</span>
+                  <span>8px Radius</span>
+                </div>
+              </div>
+              <div>
+                <h3>交互系统</h3>
+                <p>操作反馈低干扰：按钮 loading、行内错误、轻量 toast、确认弹窗只用于危险动作；客服 IM 固定为全局浮窗和消息监测，不进入独立导航。</p>
+                <div class="tag-grid">
+                  <span>Loading</span>
+                  <span>Inline Error</span>
+                  <span>Toast</span>
+                  <span>IM Float</span>
+                </div>
+              </div>
+              <div>
+                <h3>AI 生成规则</h3>
+                <p>生成页面时先声明页面目标、数据来源、权限字符和空状态；避免装饰性大图、彩色渐变、大面积深色背景和复杂动效，保证业务数据可读。</p>
+                <div class="tag-grid">
+                  <span>Goal</span>
+                  <span>API</span>
+                  <span>Permission</span>
+                  <span>Empty State</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="stack" class="doc-section" data-search="技术栈 Go Gin GORM MySQL Redis Viper Zap React TypeScript Vite Zustand Ant Design TanStack Query 腾讯云 COS 阿里云 OSS 七牛 短信">
+            <p class="section-kicker">Stack</p>
+            <h2>3. 技术栈</h2>
+
+            <div class="stack-grid">
+              <div>
+                <h3>3.1 后端</h3>
+                <div class="stack-list">
+                  <span>Go 1.22+</span>
+                  <span>Gin 1.10+</span>
+                  <span>GORM 1.25+</span>
+                  <span>MySQL 5.7+ / 8.0+</span>
+                  <span>Redis 6.0+</span>
+                  <span>WebSocket</span>
+                  <span>Viper</span>
+                  <span>Zap / slog</span>
+                  <span>Validator</span>
+                  <span>Casbin 或自研 RBAC</span>
+                  <span>Excelize</span>
+                  <span>robfig/cron</span>
+                  <span>腾讯云 COS SDK</span>
+                  <span>阿里云 OSS SDK</span>
+                  <span>七牛云 SDK</span>
+                  <span>腾讯云 SMS SDK</span>
+                  <span>阿里云 SMS SDK</span>
+                </div>
+              </div>
+              <div>
+                <h3>3.2 前端</h3>
+                <div class="stack-list">
+                  <span>React 19.x</span>
+                  <span>TypeScript 5.x</span>
+                  <span>Vite 6.x</span>
+                  <span>React Router 7.x</span>
+                  <span>Zustand 5.x</span>
+                  <span>Ant Design 5.x</span>
+                  <span>Ant Design Mobile 5.x</span>
+                  <span>Axios 1.x</span>
+                  <span>TanStack Query 5.x</span>
+                  <span>ECharts 5.x</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="callout">
+              <strong>前端原则</strong>
+              <p>PC 管理后台和 H5 移动端都使用 React，并共用接口协议、鉴权协议、权限数据和请求封装思想。可抽取 <code>packages/shared</code> 放置类型定义、请求封装、权限判断和通用工具。</p>
+            </div>
+          </section>
+
+          <section id="architecture" class="doc-section" data-search="项目目录 monorepo admin h5 server internal common middleware response upload sdk storage sms">
+            <p class="section-kicker">Architecture</p>
+            <h2>4. 项目目录</h2>
+            <p>推荐使用 monorepo，把 PC 管理后台、H5 移动端和 Go 后端放在同一个仓库里。</p>
+
+            <div class="architecture-map" aria-label="框架架构图">
+              <div class="arch-node frontend">
+                <span>React PC</span>
+                <strong>admin/</strong>
+                <p>管理后台、动态路由、权限组件</p>
+              </div>
+              <div class="arch-node frontend">
+                <span>React H5</span>
+                <strong>h5/</strong>
+                <p>移动端 Web、业务页面、共享请求</p>
+              </div>
+              <div class="arch-arrow">API</div>
+              <div class="arch-node backend">
+                <span>Go API</span>
+                <strong>server/</strong>
+                <p>controller、service、repository、IM Gateway</p>
+              </div>
+              <div class="arch-node infra">
+                <span>Data</span>
+                <strong>MySQL / Redis</strong>
+                <p>业务数据、token、缓存、任务状态</p>
+              </div>
+            </div>
+
+            <pre><code class="language-text">aideadmin/
+├── admin/                         # PC 管理后台 React 源码
+│   └── src/
+│       ├── api/
+│       ├── components/
+│       ├── hooks/
+│       ├── layout/
+│       ├── pages/
+│       ├── router/
+│       ├── stores/
+│       ├── styles/
+│       ├── utils/
+│       └── main.tsx
+├── h5/                            # H5 移动端 React 源码
+│   └── src/
+│       ├── api/
+│       ├── components/
+│       ├── hooks/
+│       ├── pages/
+│       ├── router/
+│       ├── stores/
+│       ├── styles/
+│       ├── utils/
+│       └── main.tsx
+├── server/                        # Go 后端
+│   ├── cmd/
+│   │   ├── api/
+│   │   └── worker/
+│   ├── configs/
+│   ├── internal/
+│   │   ├── admin/
+│   │   ├── im/
+│   │   ├── common/
+│   │   │   ├── sdk/
+│   │   │   │   ├── storage/
+│   │   │   │   └── sms/
+│   │   └── model/
+│   ├── migrations/
+│   └── storage/
+├── docker/
+└── docs/</code></pre>
+          </section>
+
+          <section id="request-lifecycle" class="doc-section" data-search="请求生命周期 Gin Router Recovery Trace Cors Login Permission Controller DTO Service Repository response">
+            <p class="section-kicker">Backend Flow</p>
+            <h2>5. 后端请求生命周期</h2>
+
+            <div class="callout">
+              <strong>首次运行规则</strong>
+              <p>框架首次启动不要求数据库已配置或可连接。不存在安装锁时进入安装模式，只开放安装向导、静态资源和健康检查；保存数据库配置并执行安装后，才初始化数据库连接、导入 seed 数据并启动完整后台能力。</p>
+            </div>
+
+            <div class="flow-line" aria-label="后端请求生命周期">
+              <span>HTTP</span>
+              <span>Security</span>
+              <span>Controller</span>
+              <span>DTO</span>
+              <span>Service</span>
+              <span>Repository</span>
+              <span>response.JSON</span>
+            </div>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>层</th><th>职责</th><th>禁止事项</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>route</td><td>注册路由、中间件分组</td><td>不写业务逻辑</td></tr>
+                  <tr><td>controller</td><td>接收参数、调用 service、返回响应</td><td>不写复杂 SQL</td></tr>
+                  <tr><td>dto</td><td>请求字段定义和参数校验</td><td>不依赖数据库</td></tr>
+                  <tr><td>service</td><td>核心业务规则、事务编排</td><td>不直接处理 HTTP</td></tr>
+                  <tr><td>repository</td><td>数据查询、更新、复杂条件</td><td>不处理权限和响应</td></tr>
+                  <tr><td>model</td><td>数据库表结构映射</td><td>不放业务流程</td></tr>
+                  <tr><td>vo</td><td>响应给前端的字段结构</td><td>不返回敏感字段</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>安全中间件</h3>
+            <pre><code class="language-text">Recovery
+-> Trace
+-> CORS
+-> SecurityHeader
+-> ClientIP
+-> RateLimit
+-> AntiReplay
+-> SqlGuard
+-> LoginAuth
+-> AdminContext
+-> Permission
+-> Controller</code></pre>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>中间件</th><th>能力</th><th>实现要点</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>RateLimit</td><td>接口限流和防刷</td><td>Redis Lua 令牌桶 / 滑动窗口，按 IP、账号、路由、场景组合限流</td></tr>
+                  <tr><td>AntiReplay</td><td>重复提交和重放控制</td><td>写操作校验 Idempotency-Key / nonce，短 TTL 内只允许一次</td></tr>
+                  <tr><td>SqlGuard</td><td>SQL 注入风险拦截</td><td>检查 query/body 中明显注入 payload，记录风险日志</td></tr>
+                  <tr><td>ClientIP</td><td>真实 IP 解析</td><td>只信任 trusted_proxies，避免伪造 X-Forwarded-For</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="api-contract" class="doc-section" data-search="统一接口协议 code show msg data PageData 状态码 分页 响应结构">
+            <p class="section-kicker">API Contract</p>
+            <h2>6. 统一接口协议</h2>
+            <p>前端只识别统一响应结构：</p>
+
+            <pre><code class="language-json">{
+  "code": 1,
+  "show": 0,
+  "msg": "success",
+  "data": {}
+}</code></pre>
+
+            <div class="status-grid">
+              <div><strong>1</strong><span>成功</span></div>
+              <div><strong>0</strong><span>业务失败</span></div>
+              <div><strong>401</strong><span>未登录或 token 失效</span></div>
+              <div><strong>403</strong><span>无权限</span></div>
+              <div><strong>422</strong><span>参数校验失败</span></div>
+              <div><strong>429</strong><span>请求过于频繁</span></div>
+              <div><strong>500</strong><span>系统异常</span></div>
+            </div>
+
+            <h3>分页响应</h3>
+            <pre><code class="language-json">{
+  "code": 1,
+  "show": 0,
+  "msg": "success",
+  "data": {
+    "lists": [],
+    "count": 0,
+    "page_no": 1,
+    "page_size": 15,
+    "extend": {}
+  }
+}</code></pre>
+
+            <h3>Go 响应结构</h3>
+            <pre><code class="language-go">type Body struct {
+    Code int         `json:"code"`
+    Show int         `json:"show"`
+    Msg  string      `json:"msg"`
+    Data interface{} `json:"data"`
+}
+
+type PageData struct {
+    Lists    interface{} `json:"lists"`
+    Count    int64       `json:"count"`
+    PageNo   int         `json:"page_no"`
+    PageSize int         `json:"page_size"`
+    Extend   interface{} `json:"extend,omitempty"`
+}</code></pre>
+          </section>
+
+          <section id="install-flow" class="doc-section" data-search="安装 首次运行 数据库配置 安装向导 installapi install.lock 初始化数据 seed table_prefix">
+            <p class="section-kicker">Installation</p>
+            <h2>7. 安装与首次运行流程</h2>
+            <p>框架首次运行时不检查业务数据库连接。后端先判断安装状态，未安装时进入安装模式；只有用户在安装向导中写好数据库配置并确认安装后，才创建表、导入初始化数据和生成安装锁。</p>
+
+            <div class="flow-line" aria-label="安装流程">
+              <span>启动服务</span>
+              <span>检测安装锁</span>
+              <span>安装向导</span>
+              <span>检测数据库</span>
+              <span>写入配置</span>
+              <span>初始化数据</span>
+              <span>进入后台</span>
+            </div>
+
+            <div class="feature-grid">
+              <div>
+                <h3>安装状态</h3>
+                <p>不存在 <code>storage/install.lock</code> 时只加载基础配置、日志、安装路由、静态资源和健康检查，不初始化业务数据库连接池，不启动 worker。</p>
+              </div>
+              <div>
+                <h3>安装接口</h3>
+                <p>安装向导使用 <code>/installapi/status</code>、<code>/installapi/database/check</code>、<code>/installapi/config/save</code>、<code>/installapi/install</code>。</p>
+              </div>
+              <div>
+                <h3>初始化数据</h3>
+                <p>数据库表前缀由安装页面提交的 <code>database.table_prefix</code> 决定。后端校验后写入配置，安装执行器再按该前缀渲染物理表名并导入 seed。</p>
+              </div>
+              <div>
+                <h3>幂等保护</h3>
+                <p>存在安装锁后禁止再次安装；安装失败只返回失败步骤和错误摘要，不生成安装锁，不输出数据库密码和密钥。</p>
+              </div>
+            </div>
+
+            <pre><code class="language-yaml">install:
+  installed: false
+  lock_file: storage/install.lock
+
+database:
+  driver: mysql
+  host: 127.0.0.1
+  port: 3306
+  database: aideadmin
+  username: root
+  password: ""
+  charset: utf8mb4
+  timezone: Local
+  table_prefix: aide_</code></pre>
+
+            <pre><code class="language-json">{
+  "database": {
+    "host": "127.0.0.1",
+    "port": 3306,
+    "database": "aideadmin",
+    "username": "root",
+    "password": "",
+    "table_prefix": "aide_"
+  },
+  "admin": {
+    "username": "admin",
+    "password": "admin123456"
+  }
+}</code></pre>
+
+            <div class="callout">
+              <strong>表前缀规则</strong>
+              <p><code>table_prefix</code> 只能来自安装页面提交参数，允许字母、数字、下划线，必须以字母开头，建议以下划线结尾。安装完成后不建议修改，必须修改时需要通过迁移脚本重命名所有物理表。</p>
+            </div>
+
+            <pre><code class="language-sql">INSERT INTO {{prefix}}sys_config (`key`, `value`, `name`)
+VALUES ('site.name', 'AideAdmin', '站点名称');</code></pre>
+          </section>
+
+          <section id="auth" class="doc-section" data-search="认证 token JWT Redis 管理员上下文 AdminContext 登录 退出 踢下线 图形验证码 短信验证码 鉴权 中间件">
+            <p class="section-kicker">Auth</p>
+            <h2>8. 认证与管理员上下文</h2>
+            <p>后台认证模块负责确认请求身份、判断登录态、写入管理员上下文，并在进入 controller 前完成权限校验。</p>
+
+            <h3>登录流程</h3>
+            <pre><code class="language-text">提交账号密码
+  -> 校验图形验证码 / 短信验证码
+  -> 校验账号状态
+  -> 校验密码 hash
+  -> 生成 token
+  -> Redis 写入会话
+  -> 更新最后登录时间和 IP
+  -> 写登录日志
+  -> 返回 token、管理员信息、导航入口、权限字符</code></pre>
+
+            <h3>登录接口</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>动作</th><th>方法</th><th>路径</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>登录</td><td>POST</td><td>/adminapi/login</td><td>账号密码登录，可叠加验证码</td></tr>
+                  <tr><td>退出</td><td>POST</td><td>/adminapi/logout</td><td>清理当前 token</td></tr>
+                  <tr><td>管理员信息</td><td>GET</td><td>/adminapi/account/info</td><td>返回管理员、角色、权限字符</td></tr>
+                  <tr><td>导航入口</td><td>GET</td><td>/adminapi/account/navs</td><td>返回顶部导航和图标卡片入口</td></tr>
+                  <tr><td>权限</td><td>GET</td><td>/adminapi/account/perms</td><td>返回按钮和接口权限</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>Token 规则</h3>
+            <pre><code class="language-text">token: &lt;admin-token&gt;
+version: &lt;client-version&gt;
+terminal: admin</code></pre>
+
+            <div class="feature-grid">
+              <div>
+                <h3>会话规则</h3>
+                <p>Redis 保存 token 与管理员会话，支持主动退出、踢下线、修改密码后失效。默认同账号允许多端登录，可配置为单端登录。</p>
+              </div>
+              <div>
+                <h3>安全规则</h3>
+                <p>密码使用 bcrypt / argon2，登录失败 5 次 / 10 分钟触发锁定；短信验证码 300 秒有效，同手机号 60 秒 1 次。</p>
+              </div>
+            </div>
+
+            <h3>Redis Key</h3>
+            <pre><code class="language-text">auth:admin:token:{token}       # token -> admin session
+auth:admin:user:{admin_id}     # admin_id -> token set
+auth:admin:perm:{admin_id}     # 管理员权限缓存
+auth:login:fail:{username}     # 登录失败次数
+auth:captcha:{captcha_key}     # 图形验证码
+auth:sms:{scene}:{mobile}      # 短信验证码</code></pre>
+
+            <h3>鉴权中间件顺序</h3>
+            <pre><code class="language-text">Recovery -> Trace -> CORS -> RequestLog -> LoginAuth -> AdminContext -> Permission -> OperateLog -> Controller</code></pre>
+
+            <p>免登录接口只跳过 <code>LoginAuth</code> 和 <code>Permission</code>，不跳过 <code>Trace</code>、<code>RequestLog</code> 和 <code>Recovery</code>。</p>
+            <pre><code class="language-text">POST /adminapi/login
+GET  /adminapi/captcha
+POST /adminapi/sms/send
+GET  /adminapi/common/config</code></pre>
+
+            <h3>管理员上下文</h3>
+            <pre><code class="language-go">type AdminContext struct {
+    AdminID  uint
+    RoleIDs  []uint
+    Username string
+    IsRoot   bool
+}</code></pre>
+            <p>上下文只能由中间件写入，业务代码只读取。repository 不允许读取 HTTP 上下文。</p>
+          </section>
+
+          <section id="rbac" class="doc-section" data-search="RBAC 权限 管理员 角色 顶部导航 图标卡片 导航入口 按钮 接口 权限字符 auth.admin/list">
+            <p class="section-kicker">Permission</p>
+            <h2>9. 权限体系</h2>
+            <p>本框架采用 RBAC，但后台 UX 不采用传统权限树菜单。角色绑定的是顶部导航、图标卡片入口、按钮和接口权限，服务端决定入口是否可见，接口仍通过权限字符校验。</p>
+
+            <div class="callout">
+              <strong>后台 UX 定义</strong>
+              <p>后台管理端采用黑白简约风格，类似 ChatGPT 官方 UI 的内容优先工具体验。一级模块显示在顶部菜单栏，模块首页使用导航图标卡片承载功能入口。权限表仍可命名为 <code>sys_menu</code>，但语义是“导航入口 + 权限点”。</p>
+            </div>
+
+            <div class="permission-grid">
+              <div><span>M</span><strong>顶部导航</strong><p>一级模块，显示在顶部菜单栏。</p></div>
+              <div><span>C</span><strong>图标卡片</strong><p>功能入口，显示在模块首页并对应页面路由。</p></div>
+              <div><span>A</span><strong>按钮</strong><p>对应按钮或接口权限。</p></div>
+            </div>
+
+            <h3>入口字段设计</h3>
+            <pre><code class="language-sql">CREATE TABLE sys_menu (
+  id BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+  parent_id BIGINT UNSIGNED NOT NULL DEFAULT 0,
+  type CHAR(1) NOT NULL COMMENT 'M顶部导航 C图标卡片 A按钮',
+  name VARCHAR(64) NOT NULL,
+  path VARCHAR(128) NOT NULL DEFAULT '',
+  component VARCHAR(255) NOT NULL DEFAULT '',
+  icon VARCHAR(64) NOT NULL DEFAULT '',
+  entry_desc VARCHAR(255) NOT NULL DEFAULT '',
+  entry_badge VARCHAR(64) NOT NULL DEFAULT '',
+  permission VARCHAR(128) NOT NULL DEFAULT '',
+  sort INT NOT NULL DEFAULT 0,
+  hidden TINYINT NOT NULL DEFAULT 0,
+  keep_alive TINYINT NOT NULL DEFAULT 0,
+  active_entry VARCHAR(128) NOT NULL DEFAULT '',
+  status TINYINT NOT NULL DEFAULT 1,
+  created_at DATETIME NOT NULL,
+  updated_at DATETIME NOT NULL,
+  deleted_at DATETIME NULL
+);</code></pre>
+
+            <h3>导航入口字段</h3>
+            <pre><code class="language-json">{
+  "id": 10,
+  "parent_id": 0,
+  "type": "C",
+  "name": "管理员",
+  "path": "/permission/admin",
+  "component": "permission/admin/index",
+  "icon": "UserOutlined",
+  "entry_desc": "管理员账号、角色和状态维护",
+  "entry_badge": "",
+  "permission": "auth.admin/list",
+  "meta": {
+    "title": "管理员",
+    "hidden": false,
+    "activeEntry": "",
+    "cache": false
+  },
+  "children": []
+}</code></pre>
+          </section>
+
+          <section id="routing" class="doc-section" data-search="路由规范 adminapi list detail add edit delete status export 权限字符">
+            <p class="section-kicker">Routing</p>
+            <h2>10. 路由规范</h2>
+            <p>后台接口统一前缀为 <code>/adminapi</code>。</p>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>动作</th><th>方法</th><th>路径</th><th>权限字符</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>列表</td><td>GET</td><td>/adminapi/auth/admin/list</td><td>auth.admin/list</td></tr>
+                  <tr><td>详情</td><td>GET</td><td>/adminapi/auth/admin/detail</td><td>auth.admin/detail</td></tr>
+                  <tr><td>新增</td><td>POST</td><td>/adminapi/auth/admin/add</td><td>auth.admin/add</td></tr>
+                  <tr><td>编辑</td><td>POST</td><td>/adminapi/auth/admin/edit</td><td>auth.admin/edit</td></tr>
+                  <tr><td>删除</td><td>POST</td><td>/adminapi/auth/admin/delete</td><td>auth.admin/delete</td></tr>
+                  <tr><td>状态</td><td>POST</td><td>/adminapi/auth/admin/status</td><td>auth.admin/status</td></tr>
+                  <tr><td>导出</td><td>GET</td><td>/adminapi/auth/admin/list?export=2</td><td>auth.admin/export</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="dto-list-export" class="doc-section" data-search="DTO 参数校验 列表查询 page_no page_size export 数据导出 Excel xlsx csv">
+            <p class="section-kicker">Data Flow</p>
+            <h2>11-13. DTO、列表与导出</h2>
+
+            <h3>参数校验 DTO</h3>
+            <pre><code class="language-go">type AdminCreateDTO struct {
+    Username string `json:"username" binding:"required,min=4,max=32"`
+    Password string `json:"password" binding:"required,min=6,max=32"`
+    Nickname string `json:"nickname" binding:"required,max=32"`
+    RoleIDs  []uint `json:"role_ids" binding:"required,min=1"`
+    Status   int    `json:"status" binding:"oneof=0 1"`
+}</code></pre>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>参数</th><th>类型</th><th>默认</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>page_no</td><td>int</td><td>1</td><td>页码</td></tr>
+                  <tr><td>page_size</td><td>int</td><td>15</td><td>每页数量</td></tr>
+                  <tr><td>keyword</td><td>string</td><td>空</td><td>通用关键词</td></tr>
+                  <tr><td>sort_field</td><td>string</td><td>id</td><td>排序字段</td></tr>
+                  <tr><td>sort_order</td><td>string</td><td>desc</td><td>asc / desc</td></tr>
+                  <tr><td>export</td><td>int</td><td>0</td><td>2 表示导出</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="callout">
+              <strong>导出策略</strong>
+              <p>小数据量同步生成文件，大数据量创建导出任务并交给 worker 异步生成。每个导出类必须声明字段映射，避免敏感字段泄漏。</p>
+            </div>
+          </section>
+
+          <section id="react-frontend" class="doc-section" data-search="React 前端 PC H5 Vite Axios Ant Design Mobile Zustand TanStack Query 权限组件 Hook">
+            <p class="section-kicker">Frontend</p>
+            <h2>14. React 前端约定</h2>
+            <p>PC 管理后台和 H5 移动端都使用 React。两端保持一致的工程思想、类型定义、接口协议和权限模型。</p>
+
+            <div class="dual-layout">
+              <div>
+                <h3>PC 管理后台</h3>
+                <pre><code class="language-text">admin/src/
+├── api/
+├── components/
+├── hooks/
+├── layout/
+├── pages/
+├── router/
+├── stores/
+├── styles/
+├── utils/
+└── main.tsx</code></pre>
+              </div>
+              <div>
+                <h3>H5 移动端</h3>
+                <pre><code class="language-text">h5/src/
+├── api/
+├── components/
+├── hooks/
+├── pages/
+├── router/
+├── stores/
+├── styles/
+├── utils/
+└── main.tsx</code></pre>
+              </div>
+            </div>
+
+            <h3>样式封装标准</h3>
+            <p>框架必须提供统一样式基座。业务开发、代码生成器、后台页面、H5 页面和安装向导都只能继承或组合框架样式，不允许每个页面散写一套视觉规则。</p>
+
+            <div class="feature-grid">
+              <div>
+                <h3>样式分层</h3>
+                <p><code>packages/ui/styles</code> 统一存放 token、reset、base、admin、h5、install 样式；admin 和 H5 项目只引入框架样式包。</p>
+              </div>
+              <div>
+                <h3>设计 Token</h3>
+                <p>颜色、间距、圆角、字号、阴影、z-index 必须通过 CSS 变量定义，业务页面禁止直接写新的主题色。</p>
+              </div>
+              <div>
+                <h3>基础父类</h3>
+                <p>框架保留 <code>aide-</code> 样式命名空间，页面必须继承 <code>aide-page</code>、<code>aide-section</code>、<code>aide-filter</code>、<code>aide-actions</code> 等父类。</p>
+              </div>
+              <div>
+                <h3>父组件</h3>
+                <p>页面优先使用 <code>DataPage</code>、<code>FormPage</code>、<code>DetailPage</code>、<code>MobilePage</code>、<code>InstallPage</code> 组合业务内容。</p>
+              </div>
+            </div>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>父类</th><th>用途</th><th>使用场景</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>aide-page</td><td>页面根容器</td><td>admin / H5 / install 页面</td></tr>
+                  <tr><td>aide-page__header</td><td>标题、描述、主操作</td><td>列表页、表单页、详情页</td></tr>
+                  <tr><td>aide-section</td><td>内容分区</td><td>筛选区、表单区、详情区</td></tr>
+                  <tr><td>aide-filter</td><td>筛选表单容器</td><td>列表查询</td></tr>
+                  <tr><td>aide-actions</td><td>操作按钮区</td><td>顶部操作、表格行操作</td></tr>
+                  <tr><td>aide-entry-card</td><td>导航图标卡片</td><td>功能入口</td></tr>
+                  <tr><td>aide-empty</td><td>空状态</td><td>无数据、无权限、未配置</td></tr>
+                  <tr><td>aide-mobile-page</td><td>H5 页面根容器</td><td>H5 页面</td></tr>
+                  <tr><td>aide-install-page</td><td>安装向导页面根容器</td><td>首次安装流程</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <pre><code class="language-css">:root {
+  --aide-color-bg: #f7f7f5;
+  --aide-color-surface: #ffffff;
+  --aide-color-text: #111111;
+  --aide-color-muted: #5f5f5b;
+  --aide-color-border: #deded9;
+  --aide-radius-md: 8px;
+  --aide-space-4: 16px;
+  --aide-shadow-float: 0 10px 28px rgba(0, 0, 0, 0.05);
+}</code></pre>
+
+            <pre><code class="language-tsx">import { DataPage } from '@aideadmin/ui'
+
+export default function AdminListPage() {
+  return (
+    &lt;DataPage
+      title="管理员"
+      description="管理员账号、角色和状态维护"
+      permission="auth.admin/list"
+      filter={&lt;AdminFilter /&gt;}
+      actions={&lt;AdminActions /&gt;}
+      table={&lt;AdminTable /&gt;}
+      emptyText="暂无管理员"
+    /&gt;
+  )
+}</code></pre>
+
+            <div class="callout">
+              <strong>生成器规则</strong>
+              <p>代码生成器生成 React 页面时必须使用框架父组件和 <code>aide-</code> 父类，禁止生成大段内联 style，禁止为单个页面写独立主题色、圆角、阴影和布局规则。</p>
+            </div>
+
+            <h3>权限组件</h3>
+            <pre><code class="language-tsx">import { Button } from 'antd'
+import { Permission } from '@/components/Permission'
+
+export function AdminToolbar() {
+  return (
+    &lt;&gt;
+      &lt;Permission value="auth.admin/add"&gt;
+        &lt;Button type="primary"&gt;新增&lt;/Button&gt;
+      &lt;/Permission&gt;
+      &lt;Permission anyOf={['auth.admin/edit', 'auth.admin/delete']}&gt;
+        &lt;Button&gt;操作&lt;/Button&gt;
+      &lt;/Permission&gt;
+    &lt;/&gt;
+  )
+}</code></pre>
+
+            <h3>请求防抖和重复提交</h3>
+            <p>前端请求封装必须内置防抖、请求去重、写操作幂等键和路由切换取消请求。GET 搜索默认 300ms 防抖，POST / PUT / DELETE 默认 800ms 重复提交锁。</p>
+            <pre><code class="language-ts">request.post('/auth/admin/add', data, {
+  debounceKey: 'auth.admin.add',
+  debounceMs: 800,
+  idempotent: true,
+})</code></pre>
+          </section>
+
+          <section id="customer-im" class="doc-section" data-search="客服 IM 在线客服 WebSocket 会话 消息 常用话术 全局浮窗 消息监测 H5 快速接入">
+            <p class="section-kicker">Customer IM</p>
+            <h2>15. 客服 IM 模块</h2>
+            <p>客服 IM 是框架内置的全局能力，不新增独立导航入口。H5 端负责发起咨询，PC 管理后台通过全局浮窗接待会话，并由消息监测机制常驻监听未读、分配、断线重连和新消息提醒。</p>
+
+            <div class="feature-grid">
+              <div>
+                <h3>H5 快速接入</h3>
+                <p>业务页面加入“联系客服”入口，打开聊天页后创建或恢复会话，并建立 WebSocket 连接。</p>
+              </div>
+              <div>
+                <h3>全局浮窗</h3>
+                <p>PC 后台在主布局挂载客服浮窗和抽屉面板，不占用独立导航入口，支持会话列表、聊天窗口和快捷回复。</p>
+              </div>
+              <div>
+                <h3>消息监测</h3>
+                <p>全局 Provider 监听新消息、未读数、分配状态、连接状态和重连事件，并驱动浮窗角标与通知。</p>
+              </div>
+              <div>
+                <h3>可靠投递</h3>
+                <p>消息先落库再投递，客户端使用 client_msg_id 去重，Redis 维护在线状态和待分配队列。</p>
+              </div>
+            </div>
+
+            <h3>模块目录</h3>
+            <div class="dual-layout">
+              <div>
+                <pre><code class="language-text">server/internal/im/
+├── gateway/
+├── service/
+├── repository/
+├── dto/
+└── vo/</code></pre>
+              </div>
+              <div>
+                <pre><code class="language-text">admin/src/features/im/
+├── ImMonitorProvider.tsx
+├── ImFloatingEntry.tsx
+├── ImWorkbenchDrawer.tsx
+├── hooks/
+└── api/
+
+h5/src/pages/im/
+└── chat/</code></pre>
+              </div>
+            </div>
+
+            <h3>WebSocket 连接</h3>
+            <pre><code class="language-text">GET /adminapi/im/ws?token=&lt;admin-token&gt;&amp;terminal=admin
+GET /h5api/im/ws?token=&lt;user-token&gt;&amp;terminal=h5
+GET /h5api/im/ws?visitor_id=&lt;visitor-id&gt;&amp;terminal=h5</code></pre>
+
+            <h3>WebSocket 消息协议</h3>
+            <pre><code class="language-json">{
+  "type": "message.send",
+  "request_id": "req_1700000000",
+  "data": {
+    "session_id": "s_10001",
+    "client_msg_id": "cmsg_1700000000",
+    "msg_type": "text",
+    "content": "你好，我想咨询订单",
+    "payload": {}
+  }
+}</code></pre>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>type</th><th>方向</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>ping / pong</td><td>双向</td><td>心跳检测</td></tr>
+                  <tr><td>session.create</td><td>client -> server</td><td>创建或恢复会话</td></tr>
+                  <tr><td>session.assign</td><td>server -> client</td><td>会话已分配客服</td></tr>
+                  <tr><td>message.send</td><td>client -> server</td><td>发送消息</td></tr>
+                  <tr><td>message.push</td><td>server -> client</td><td>推送新消息</td></tr>
+                  <tr><td>message.read</td><td>client -> server</td><td>标记已读</td></tr>
+                  <tr><td>session.close</td><td>双向</td><td>关闭会话</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>HTTP API</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>动作</th><th>方法</th><th>路径</th><th>权限字符</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>会话列表</td><td>GET</td><td>/adminapi/im/session/list</td><td>im.session/list</td></tr>
+                  <tr><td>接待会话</td><td>POST</td><td>/adminapi/im/session/accept</td><td>im.session/accept</td></tr>
+                  <tr><td>转接会话</td><td>POST</td><td>/adminapi/im/session/transfer</td><td>im.session/transfer</td></tr>
+                  <tr><td>关闭会话</td><td>POST</td><td>/adminapi/im/session/close</td><td>im.session/close</td></tr>
+                  <tr><td>消息记录</td><td>GET</td><td>/adminapi/im/message/list</td><td>im.message/list</td></tr>
+                  <tr><td>发送消息</td><td>POST</td><td>/adminapi/im/message/send</td><td>im.message/send</td></tr>
+                  <tr><td>未读监测</td><td>GET</td><td>/adminapi/im/monitor/unread</td><td>im.monitor/unread</td></tr>
+                  <tr><td>常用话术</td><td>GET</td><td>/adminapi/im/reply/list</td><td>im.reply/list</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>全局浮窗接入</h3>
+            <pre><code class="language-tsx">import { ImMonitorProvider } from '@/features/im/ImMonitorProvider'
+import { ImFloatingEntry } from '@/features/im/ImFloatingEntry'
+
+export function AdminLayout() {
+  return (
+    &lt;ImMonitorProvider&gt;
+      &lt;MainLayout /&gt;
+      &lt;ImFloatingEntry /&gt;
+    &lt;/ImMonitorProvider&gt;
+  )
+}</code></pre>
+
+            <h3>核心数据表</h3>
+            <div class="tag-grid">
+              <span>im_session</span>
+              <span>im_message</span>
+              <span>im_session_user</span>
+              <span>im_customer_service</span>
+              <span>im_reply_group</span>
+              <span>im_reply</span>
+              <span>im_blacklist</span>
+              <span>im_event</span>
+            </div>
+
+            <h3>H5 最小接入</h3>
+            <pre><code class="language-tsx">import { useNavigate } from 'react-router'
+
+export function ContactServiceButton({ scene, orderId }: { scene: string; orderId?: number }) {
+  const navigate = useNavigate()
+
+  return (
+    &lt;button onClick={() => navigate(`/im/chat?scene=${scene}&amp;order_id=${orderId || ''}`)}&gt;
+      联系客服
+    &lt;/button&gt;
+  )
+}</code></pre>
+
+            <h3>快速接入步骤</h3>
+            <ol class="step-list">
+              <li>后端建立 <code>server/internal/im</code> 模块，创建 IM 数据库表。</li>
+              <li>注册 <code>/adminapi/im/ws</code>、<code>/h5api/im/ws</code> 和 HTTP API。</li>
+              <li>实现 WebSocket 鉴权、心跳、连接管理、消息落库和推送。</li>
+              <li>PC 在主布局挂载 <code>ImMonitorProvider</code>、<code>ImFloatingEntry</code> 和 <code>ImWorkbenchDrawer</code> 抽屉式接待面板。</li>
+              <li>H5 新增 <code>h5/src/pages/im/chat/index.tsx</code> 聊天页。</li>
+              <li>不给客服 IM 创建独立导航入口，仅给客服角色分配会话、消息、监测和话术权限。</li>
+            </ol>
+          </section>
+
+          <section id="third-party-integrations" class="doc-section" data-search="第三方能力 腾讯云 COS 阿里云 OSS 七牛云 Kodo 对象存储 storage sms 腾讯云短信 阿里云短信 短信验证码 上传 SDK">
+            <p class="section-kicker">Integrations</p>
+            <h2>16. 第三方能力接入</h2>
+            <p>第三方能力统一放在 <code>server/internal/common/sdk</code> 下，业务模块只依赖框架接口，不直接调用腾讯云、阿里云或七牛云 SDK。</p>
+
+            <div class="feature-grid">
+              <div>
+                <h3>对象存储</h3>
+                <p>支持本地存储、腾讯云 COS、阿里云 OSS、七牛云对象存储。统一提供上传、抓取远程资源、删除文件和生成访问地址。</p>
+              </div>
+              <div>
+                <h3>短信服务</h3>
+                <p>支持腾讯云短信、阿里云短信。统一提供模板发送、发送日志、频率限制、验证码校验和使用后失效。</p>
+              </div>
+            </div>
+
+            <h3>支持驱动</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>能力</th><th>驱动</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>对象存储</td><td>local</td><td>本地开发和私有部署默认存储</td></tr>
+                  <tr><td>对象存储</td><td>tencent_cos</td><td>腾讯云 COS</td></tr>
+                  <tr><td>对象存储</td><td>aliyun_oss</td><td>阿里云 OSS</td></tr>
+                  <tr><td>对象存储</td><td>qiniu_kodo</td><td>七牛云对象存储</td></tr>
+                  <tr><td>短信</td><td>tencent_sms</td><td>腾讯云短信</td></tr>
+                  <tr><td>短信</td><td>aliyun_sms</td><td>阿里云短信</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>后端目录</h3>
+            <pre><code class="language-text">server/internal/common/sdk/
+├── storage/
+│   ├── driver.go
+│   ├── local.go
+│   ├── tencent_cos.go
+│   ├── aliyun_oss.go
+│   └── qiniu_kodo.go
+└── sms/
+    ├── driver.go
+    ├── tencent_sms.go
+    └── aliyun_sms.go</code></pre>
+
+            <div class="dual-layout">
+              <div>
+                <h3>存储接口</h3>
+                <pre><code class="language-go">type StorageDriver interface {
+    Put(ctx context.Context, objectKey string, reader io.Reader, size int64, contentType string) (*FileObject, error)
+    Fetch(ctx context.Context, url string, objectKey string) (*FileObject, error)
+    Delete(ctx context.Context, objectKey string) error
+    PublicURL(objectKey string) string
+}</code></pre>
+              </div>
+              <div>
+                <h3>短信接口</h3>
+                <pre><code class="language-go">type SmsDriver interface {
+    Send(ctx context.Context, req SmsSendRequest) (*SmsSendResult, error)
+}
+
+type SmsSendRequest struct {
+    Mobile     string
+    TemplateID string
+    Params     map[string]string
+    Scene      string
+}</code></pre>
+              </div>
+            </div>
+
+            <h3>配置示例</h3>
+            <pre><code class="language-yaml">storage:
+  default: local
+  allowed_ext:
+    image: [jpg, jpeg, png, gif, webp]
+    file: [pdf, doc, docx, xls, xlsx, zip]
+  max_size_mb: 50
+  tencent_cos:
+    enabled: false
+    secret_id: ${TENCENT_COS_SECRET_ID}
+    secret_key: ${TENCENT_COS_SECRET_KEY}
+    region: ap-guangzhou
+    bucket: ""
+  aliyun_oss:
+    enabled: false
+    access_key_id: ${ALIYUN_OSS_ACCESS_KEY_ID}
+    access_key_secret: ${ALIYUN_OSS_ACCESS_KEY_SECRET}
+    endpoint: oss-cn-hangzhou.aliyuncs.com
+    bucket: ""
+  qiniu_kodo:
+    enabled: false
+    access_key: ${QINIU_ACCESS_KEY}
+    secret_key: ${QINIU_SECRET_KEY}
+    bucket: ""
+
+sms:
+  default: tencent_sms
+  code_ttl_seconds: 300
+  send_interval_seconds: 60
+  daily_limit: 20
+  tencent_sms:
+    enabled: false
+    secret_id: ${TENCENT_SMS_SECRET_ID}
+    secret_key: ${TENCENT_SMS_SECRET_KEY}
+    region: ap-guangzhou
+    app_id: ""
+    sign: ""
+  aliyun_sms:
+    enabled: false
+    access_key_id: ${ALIYUN_SMS_ACCESS_KEY_ID}
+    access_key_secret: ${ALIYUN_SMS_ACCESS_KEY_SECRET}
+    region: cn-hangzhou
+    sign: ""</code></pre>
+
+            <h3>上传与短信 API</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>动作</th><th>方法</th><th>路径</th><th>权限字符 / 场景</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>上传文件</td><td>POST</td><td>/adminapi/common/upload/file</td><td>common.upload/file</td></tr>
+                  <tr><td>上传图片</td><td>POST</td><td>/adminapi/common/upload/image</td><td>common.upload/image</td></tr>
+                  <tr><td>删除文件</td><td>POST</td><td>/adminapi/common/upload/delete</td><td>common.upload/delete</td></tr>
+                  <tr><td>存储配置</td><td>GET</td><td>/adminapi/system/storage/detail</td><td>system.storage/detail</td></tr>
+                  <tr><td>保存存储配置</td><td>POST</td><td>/adminapi/system/storage/save</td><td>system.storage/save</td></tr>
+                  <tr><td>发送短信</td><td>POST</td><td>/adminapi/sms/send</td><td>admin_login / security_verify</td></tr>
+                  <tr><td>发送短信</td><td>POST</td><td>/h5api/sms/send</td><td>user_login / user_bind_mobile</td></tr>
+                  <tr><td>保存短信配置</td><td>POST</td><td>/adminapi/system/sms/save</td><td>system.sms/save</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>安全规则</h3>
+            <div class="feature-grid">
+              <div>
+                <h3>上传安全</h3>
+                <p>上传前校验文件大小、扩展名和 MIME，服务端生成对象 key，文件信息写入 <code>sys_file</code>，私有桶通过后端签名 URL 访问。</p>
+              </div>
+              <div>
+                <h3>短信安全</h3>
+                <p>同手机号 60 秒 1 条，同手机号同场景每天最多 20 条；验证码 5 分钟有效，校验成功后标记已使用，失败超过 5 次后失效。</p>
+              </div>
+            </div>
+
+            <div class="callout">
+              <strong>接入原则</strong>
+              <p>密钥只允许从环境变量、密钥管理服务或加密配置读取；后台配置页必须脱敏展示；测试连接接口只返回成功 / 失败和错误摘要。</p>
+            </div>
+          </section>
+
+          <section id="database" class="doc-section" data-search="数据库 基础表 sys_admin sys_role sys_menu sys_config sys_file sys_sms_log sys_sms_code sys_cron_task sys_export_task im_session im_message">
+            <p class="section-kicker">Database</p>
+            <h2>17. 数据库基础表</h2>
+            <p>数据库表名由安装前缀和逻辑表名组成。安装前缀由安装页面提交的 <code>database.table_prefix</code> 决定，后端校验后写入配置，安装执行器再根据该值生成最终物理表名。文档中的 <code>sys_</code>、<code>im_</code>、<code>cms_</code> 都只是逻辑表命名空间，不是最终物理表前缀。</p>
+
+            <pre><code class="language-text">physical_table = database.table_prefix + logical_table</code></pre>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>类型</th><th>逻辑命名空间</th><th>物理表生成</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>系统表</td><td>sys_</td><td>{table_prefix}sys_admin</td><td>管理员、角色、配置、字典、日志</td></tr>
+                  <tr><td>客服 IM</td><td>im_</td><td>{table_prefix}im_session</td><td>会话、消息、客服、话术</td></tr>
+                  <tr><td>业务表</td><td>cms_ / mall_ / user_</td><td>{table_prefix}cms_article</td><td>按业务模块划分</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="callout">
+              <strong>前缀规则</strong>
+              <p>model、repository、migration 和 seed 不允许写死最终物理表名；初始化 SQL 使用 <code>{{prefix}}</code> 占位符，安装执行器按安装页面提交并写入配置的 <code>database.table_prefix</code> 渲染后执行。</p>
+            </div>
+
+            <p>第一阶段至少实现以下逻辑表，安装时按 <code>database.table_prefix</code> 生成物理表：</p>
+            <div class="tag-grid">
+              <span>sys_admin -> {{prefix}}sys_admin</span>
+              <span>sys_role -> {{prefix}}sys_role</span>
+              <span>sys_menu -> {{prefix}}sys_menu</span>
+              <span>sys_role_menu -> {{prefix}}sys_role_menu</span>
+              <span>sys_admin_role -> {{prefix}}sys_admin_role</span>
+              <span>sys_login_log -> {{prefix}}sys_login_log</span>
+              <span>sys_operate_log -> {{prefix}}sys_operate_log</span>
+              <span>sys_config -> {{prefix}}sys_config</span>
+              <span>sys_dict_type -> {{prefix}}sys_dict_type</span>
+              <span>sys_dict_data -> {{prefix}}sys_dict_data</span>
+              <span>sys_file -> {{prefix}}sys_file</span>
+              <span>sys_sms_log -> {{prefix}}sys_sms_log</span>
+              <span>sys_sms_code -> {{prefix}}sys_sms_code</span>
+              <span>sys_cron_task -> {{prefix}}sys_cron_task</span>
+              <span>sys_export_task -> {{prefix}}sys_export_task</span>
+              <span>im_session -> {{prefix}}im_session</span>
+              <span>im_message -> {{prefix}}im_message</span>
+              <span>im_customer_service -> {{prefix}}im_customer_service</span>
+              <span>im_reply -> {{prefix}}im_reply</span>
+            </div>
+            <pre><code class="language-sql">id BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+created_at DATETIME NOT NULL,
+updated_at DATETIME NOT NULL,
+deleted_at DATETIME NULL</code></pre>
+          </section>
+
+          <section id="ops" class="doc-section" data-search="日志 配置 定时任务 错误处理 BizError 操作日志 登录日志 yaml worker storage sms 密钥">
+            <p class="section-kicker">Operations</p>
+            <h2>18-21. 日志、配置、定时任务与错误处理</h2>
+
+            <div class="feature-grid">
+              <div>
+                <h3>日志规范</h3>
+                <p>记录 trace_id、method、path、status、latency、client_ip、admin_id、user_agent、脱敏后的 request_body 和 response_code。</p>
+              </div>
+              <div>
+                <h3>配置规范</h3>
+                <p>配置放在 <code>server/configs/config.example.yaml</code> 和 <code>config.local.yaml</code>，生产密钥不进入仓库。</p>
+              </div>
+              <div>
+                <h3>定时任务</h3>
+                <p>系统任务和业务任务统一由 worker 执行，任务定义保存到 <code>sys_cron_task</code>。</p>
+              </div>
+              <div>
+                <h3>错误处理</h3>
+                <p>业务错误统一使用 <code>errors.BizError</code>，service 返回错误，不直接写 HTTP 响应。</p>
+              </div>
+            </div>
+
+            <pre><code class="language-yaml">app:
+  name: aideadmin
+  env: local
+  port: 8080
+  url_prefix: adminapi
+
+database:
+  driver: mysql
+  host: 127.0.0.1
+  port: 3306
+  database: aideadmin
+  username: root
+  password: password
+  charset: utf8mb4
+  timezone: Local
+  table_prefix: aide_
+  dsn: root:password@tcp(127.0.0.1:3306)/aideadmin?charset=utf8mb4&amp;parseTime=True&amp;loc=Local
+
+redis:
+  addr: 127.0.0.1:6379
+  password: ""
+  db: 0
+
+storage:
+  default: local
+  local:
+    root: storage/upload
+    public_url: /uploads
+
+sms:
+  default: tencent_sms
+  code_ttl_seconds: 300
+  send_interval_seconds: 60
+
+security:
+  trusted_proxies:
+    - 127.0.0.1
+  rate_limit:
+    enabled: true
+    driver: redis
+    default:
+      capacity: 120
+      refill_rate: 60
+      window_seconds: 60
+    routes:
+      - pattern: /adminapi/login
+        capacity: 10
+        window_seconds: 60
+        dimensions: [ip, account]
+      - pattern: /adminapi/sms/send
+        capacity: 1
+        window_seconds: 60
+        dimensions: [ip, mobile, scene]
+      - pattern: /adminapi/*/export
+        capacity: 3
+        window_seconds: 60
+        dimensions: [admin_id, route]
+  anti_replay:
+    enabled: true
+    nonce_ttl_seconds: 300
+    idempotency_ttl_seconds: 600
+  sql_guard:
+    enabled: true
+    log_only: false</code></pre>
+          </section>
+
+          <section id="business-flow" class="doc-section" data-search="业务模块 开发流程 建表 model dto vo repository service controller route nav-entry 导航入口 图标卡片 api page">
+            <p class="section-kicker">Workflow</p>
+            <h2>22. 开发一个业务模块的标准流程</h2>
+            <ol class="step-list">
+              <li>建表 <code>cms_article</code>，补齐通用字段。</li>
+              <li>新建 model：<code>internal/model/cms_article.go</code>。</li>
+              <li>新建 DTO：<code>internal/admin/dto/article_dto.go</code>。</li>
+              <li>新建 VO：<code>internal/admin/vo/article_vo.go</code>。</li>
+              <li>新建 repository：封装列表、详情、创建、更新、删除。</li>
+              <li>新建 service：处理业务规则和事务。</li>
+              <li>新建 controller：绑定参数，调用 service。</li>
+              <li>在 route 中注册接口。</li>
+              <li>PC 管理后台新增 <code>admin/src/api/cms/article.ts</code> 和 <code>admin/src/pages/cms/article/index.tsx</code>。</li>
+              <li>如 H5 需要该业务，新增 <code>h5/src/api/cms/article.ts</code> 和 <code>h5/src/pages/cms/article/index.tsx</code>。</li>
+              <li>后台导航入口中新增顶部导航、图标卡片和按钮权限。</li>
+              <li>给角色分配权限并补充测试。</li>
+            </ol>
+          </section>
+
+          <section id="generator" class="doc-section" data-search="代码生成器 生成 Go model dto vo repository service controller React PC H5 导航入口 图标卡片 SQL 存储 短信配置">
+            <p class="section-kicker">Generator</p>
+            <h2>23. 代码生成器规划</h2>
+            <p>第二阶段实现代码生成器，根据数据表和模块配置生成 Go 后端与 React 前端骨架。</p>
+            <div class="feature-grid">
+              <div>
+                <h3>输入</h3>
+                <p>数据表名、模块名、业务名、列表字段、搜索字段、表单字段、权限字符前缀。</p>
+              </div>
+              <div>
+                <h3>输出</h3>
+                <p>Go model、dto、vo、repository、service、controller、route，React PC / H5 页面，基于 <code>@aideadmin/ui</code> 父组件和 <code>aide-</code> 父类的样式骨架，客服 IM 全局浮窗接入模板、存储 / 短信配置表单和导航入口 SQL。</p>
+              </div>
+            </div>
+            <div class="callout">
+              <strong>生成器样式要求</strong>
+              <p>生成 React 页面时必须继承框架样式基座，不允许生成独立主题和大段内联 style；业务局部样式只能基于 token 扩展。</p>
+            </div>
+          </section>
+
+          <section id="milestones" class="doc-section" data-search="里程碑 基础服务 认证权限 通用后台 第三方存储 短信 工程增强 Docker OpenAPI 测试">
+            <p class="section-kicker">Roadmap</p>
+            <h2>24. 第一阶段实现里程碑</h2>
+            <div class="timeline">
+              <div><span>Milestone 1</span><strong>基础服务</strong><p>Go 项目初始化、配置、MySQL、Redis、Gin、统一响应、异常恢复和请求日志。</p></div>
+              <div><span>Milestone 2</span><strong>认证权限</strong><p>管理员登录、token 校验、管理员上下文、顶部导航、图标卡片、角色、RBAC、React 权限组件 / Hook。</p></div>
+              <div><span>Milestone 3</span><strong>通用后台能力</strong><p>系统配置、字典、上传、第三方存储、短信验证码、操作日志、登录日志、客服 IM、列表查询和 Excel 导出。</p></div>
+              <div><span>Milestone 4</span><strong>工程增强</strong><p>定时任务、代码生成器、Docker 部署、OpenAPI 文档、单元测试和接口测试。</p></div>
+            </div>
+          </section>
+
+          <section id="naming-security" class="doc-section" data-search="命名规范 安全要求 bcrypt argon2 token Redis 上传校验 导出白名单 Swagger 第三方密钥 短信限流">
+            <p class="section-kicker">Standard</p>
+            <h2>25-26. 命名规范与安全要求</h2>
+            <div class="feature-grid">
+              <div>
+                <h3>Go 命名</h3>
+                <p>包名小写，文件名 snake_case，DTO 以 DTO 结尾，VO 以 VO 或 Item 结尾。</p>
+              </div>
+              <div>
+                <h3>API 命名</h3>
+                <p>路径使用小写和 <code>/</code>，权限字符使用模块点号 + 动作斜杠，例如 <code>auth.admin/add</code>。</p>
+              </div>
+              <div>
+                <h3>数据库命名</h3>
+                <p>物理表名统一追加安装页面提交的 <code>database.table_prefix</code>；系统逻辑命名空间 <code>sys_</code>，IM 逻辑命名空间 <code>im_</code>，业务表按模块逻辑命名空间，字段使用 snake_case。</p>
+              </div>
+              <div>
+                <h3>安全要求</h3>
+                <p>密码哈希存储，登录限频，token 存 Redis，上传校验，第三方密钥脱敏，短信限流，导出字段白名单，生产环境关闭调试接口。</p>
+              </div>
+            </div>
+
+            <h3>安全防护能力</h3>
+            <div class="feature-grid">
+              <div>
+                <h3>接口限流</h3>
+                <p>RateLimitMiddleware 使用 Redis Lua 实现令牌桶或滑动窗口，按 IP、用户、路由、场景组合限流，命中后统一返回 429 和 retry_after。</p>
+              </div>
+              <div>
+                <h3>请求防抖</h3>
+                <p>前端搜索默认 300ms 防抖，写操作默认 800ms 重复提交锁；写请求自动携带 Idempotency-Key，服务端 TTL 内只处理一次。</p>
+              </div>
+              <div>
+                <h3>防 SQL 注入</h3>
+                <p>repository 必须使用参数绑定和字段白名单；排序字段、筛选字段、导出字段不能直接来自请求参数；SqlGuard 只做前置风险拦截。</p>
+              </div>
+              <div>
+                <h3>防刷 / 抗 DDoS 基线</h3>
+                <p>应用层提供黑灰名单、请求体大小限制、高成本接口降级和短时封禁；真实大流量 DDoS 依赖 CDN、WAF、负载均衡和云厂商清洗。</p>
+              </div>
+            </div>
+
+            <pre><code class="language-text">CDN / WAF / Cloud Anti-DDoS
+  -> Load Balancer
+  -> Nginx rate_limit / body limit
+  -> Go RateLimitMiddleware
+  -> Controller</code></pre>
+
+            <div class="callout">
+              <strong>SQL 安全底线</strong>
+              <p>禁止拼接用户输入生成 SQL；模糊搜索统一 escape，排序字段和排序方向必须经过白名单转换。</p>
+            </div>
+          </section>
+
+          <section id="dev-build-docker" class="doc-section" data-search="本地开发 运行 打包 Docker server admin h5 go run pnpm build docker compose">
+            <p class="section-kicker">Delivery</p>
+            <h2>27-30. 本地运行、三端打包与 Docker</h2>
+            <p>框架按三端组织运行和交付：Go 后端 <code>server</code>、PC 管理后台 <code>admin</code>、H5 移动端 <code>h5</code>。三端都必须具备本地开发命令、生产打包命令和 Docker 镜像构建方式。</p>
+
+            <h3>本地开发运行</h3>
+            <div class="feature-grid">
+              <div>
+                <h3>server</h3>
+                <pre><code class="language-bash">cd server
+cp configs/config.example.yaml configs/config.local.yaml
+go mod tidy
+go run ./cmd/api</code></pre>
+                <p>worker 单独运行：<code>go run ./cmd/worker</code>。</p>
+              </div>
+              <div>
+                <h3>admin</h3>
+                <pre><code class="language-bash">cd admin
+pnpm install
+cp .env.example .env.local
+pnpm dev --host 0.0.0.0 --port 5173</code></pre>
+              </div>
+              <div>
+                <h3>h5</h3>
+                <pre><code class="language-bash">cd h5
+pnpm install
+cp .env.example .env.local
+pnpm dev --host 0.0.0.0 --port 5174</code></pre>
+              </div>
+              <div>
+                <h3>联调顺序</h3>
+                <p>先启动 MySQL / Redis，再启动 server。未安装时进入安装向导，完成数据库配置和初始化后，再启动 admin 与 h5 联调。</p>
+              </div>
+            </div>
+
+            <h3>三端生产打包</h3>
+            <div class="dual-layout">
+              <div>
+                <h3>server</h3>
+                <pre><code class="language-bash">cd server
+go test ./...
+CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -trimpath -ldflags="-s -w" -o ../dist/server/aideadmin-api ./cmd/api
+CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -trimpath -ldflags="-s -w" -o ../dist/server/aideadmin-worker ./cmd/worker</code></pre>
+              </div>
+              <div>
+                <h3>admin / h5</h3>
+                <pre><code class="language-bash">cd admin
+pnpm install --frozen-lockfile
+pnpm lint
+pnpm build
+
+cd ../h5
+pnpm install --frozen-lockfile
+pnpm lint
+pnpm build</code></pre>
+              </div>
+            </div>
+
+            <h3>Docker 打包</h3>
+            <pre><code class="language-bash">docker build -f docker/api.Dockerfile -t aideadmin-api:latest .
+docker build -f docker/worker.Dockerfile -t aideadmin-worker:latest .
+docker build -f docker/admin.Dockerfile -t aideadmin-web:latest .
+docker build -f docker/h5.Dockerfile -t aideadmin-h5-web:latest .</code></pre>
+
+            <h3>Docker 运行</h3>
+            <pre><code class="language-bash">docker run -d --name aideadmin-api \
+  -p 8080:8080 \
+  -v ./server/configs/config.local.yaml:/app/configs/config.local.yaml \
+  -v ./server/storage:/app/storage \
+  aideadmin-api:latest
+
+docker run -d --name aideadmin-web -p 8081:80 aideadmin-web:latest
+docker run -d --name aideadmin-h5-web -p 8082:80 aideadmin-h5-web:latest</code></pre>
+
+            <h3>Compose 编排</h3>
+            <pre><code class="language-bash">docker compose -f docker/compose.yaml up -d
+docker compose -f docker/compose.yaml logs -f api
+docker compose -f docker/compose.yaml down</code></pre>
+
+            <div class="callout">
+              <strong>运行要求</strong>
+              <p><code>server/storage</code> 必须挂载持久化卷，保存上传、导出、日志和安装锁；<code>config.local.yaml</code> 通过挂载或环境变量注入，不打进镜像；生产环境建议放在 HTTPS、WAF、CDN 或负载均衡之后。</p>
+            </div>
+          </section>
+
+          <section id="license" class="doc-section" data-search="MIT License 开源协议 免费商用 二次开发 私有部署 再分发">
+            <p class="section-kicker">License</p>
+            <h2>31. 开源许可</h2>
+            <p>AideAdmin Framework 遵循 MIT License，允许免费商用、二次开发、私有化部署、修改源码、复制、分发和再授权。</p>
+            <div class="feature-grid">
+              <div>
+                <h3>允许</h3>
+                <p>免费商用、二次开发、私有部署、修改源码、复制、分发和再授权。</p>
+              </div>
+              <div>
+                <h3>要求</h3>
+                <p>保留 MIT License 版权声明和许可声明。框架按 MIT License 原样提供，不对使用结果作担保。</p>
+              </div>
+            </div>
+          </section>
+
+          <section id="docs-split" class="doc-section" data-search="后续文档 拆分 architecture api-contract rbac frontend backend database im third-party generator deployment">
+            <p class="section-kicker">Documentation</p>
+            <h2>32. 后续文档拆分建议</h2>
+            <pre><code class="language-text">docs/
+├── architecture.md          # 架构设计
+├── api-contract.md          # 接口协议
+├── rbac.md                  # 权限设计
+├── frontend.md              # 前端开发规范
+├── backend.md               # 后端开发规范
+├── database.md              # 数据库规范
+├── im.md                    # 客服 IM 接入文档
+├── third-party.md           # 第三方存储和短信接入文档
+├── generator.md             # 代码生成器设计
+└── deployment.md            # 部署文档</code></pre>
+          </section>
+        </article>
+
+      </div>
+    </main>
+
+    <script src="./script.js"></script>
+  </body>
+</html>

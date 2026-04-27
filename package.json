@@ -1,0 +1,46 @@
+{
+  "name": "@qianukj/aideadmin-skill",
+  "version": "0.1.0",
+  "description": "Codex skill for AideAdmin Framework vibe coding with Go backend and React admin/H5 rules.",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "aideadmin-skill": "./bin/aideadmin-skill.js"
+  },
+  "files": [
+    "bin/",
+    "skill/",
+    "readme.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "install-skill": "node ./bin/aideadmin-skill.js install",
+    "check": "node --check ./bin/aideadmin-skill.js && node ./scripts/validate-skill.mjs"
+  },
+  "keywords": [
+    "codex",
+    "skill",
+    "aideadmin",
+    "go",
+    "react",
+    "vibe-coding",
+    "admin-framework"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qianukj/aideadmin-skill.git"
+  },
+  "homepage": "https://aideadmin.com",
+  "bugs": {
+    "url": "https://github.com/qianukj/aideadmin-skill/issues"
+  },
+  "gitee": {
+    "url": "https://gitee.com/qianukj/aideadmin-skill"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
