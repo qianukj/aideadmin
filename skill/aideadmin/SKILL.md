@@ -11,6 +11,8 @@ Build for AI-readable business systems. Keep implementation predictable: fixed d
 
 Never introduce non-React frontend stacks, legacy PHP admin references, or traditional left-tree menu UX.
 
+Brand asset: use `assets/aideadmin.png` when generated docs, websites, or README content need the official AideAdmin logo.
+
 ## Quick Workflow
 
 1. Identify the target surface: `server`, `admin`, `h5`, installer, docs, generator, or Docker.

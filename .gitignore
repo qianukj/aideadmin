@@ -1,0 +1,5 @@
+.npmrc
+*.log
+node_modules/
+dist/
+.tmp/

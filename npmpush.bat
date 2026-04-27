@@ -1,0 +1,2 @@
+@echo off
+powershell -NoProfile -ExecutionPolicy Bypass -Command "$token = Read-Host -MaskInput 'Paste npm token'; if ([string]::IsNullOrWhiteSpace($token)) { throw 'NPM token is empty' }; Set-Content -LiteralPath .npmrc -Value ('//registry.npmjs.org/:_authToken=' + $token) -NoNewline -Encoding ascii; npm whoami --registry=https://registry.npmjs.org/; npm publish --access public --registry=https://registry.npmjs.org/; Remove-Item .npmrc -Force -ErrorAction SilentlyContinue"
