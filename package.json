@@ -1,6 +1,6 @@
 {
   "name": "@qianukj/aideadmin-skill",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Codex skill for AideAdmin Framework vibe coding with Go backend and React admin/H5 rules.",
   "license": "MIT",
   "type": "module",
