@@ -28,11 +28,11 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/qianukj/aideadmin-skill.git"
+    "url": "git+https://github.com/qianukj/aideadmin.git"
   },
   "homepage": "https://aideadmin.com",
   "bugs": {
-    "url": "https://github.com/qianukj/aideadmin-skill/issues"
+    "url": "https://github.com/qianukj/aideadmin/issues"
   },
   "gitee": {
     "url": "https://gitee.com/qianukj/aideadmin-skill"

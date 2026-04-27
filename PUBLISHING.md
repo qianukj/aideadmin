@@ -23,7 +23,7 @@ git init
 git add .
 git commit -m "feat: publish aideadmin skill"
 git branch -M main
-git remote add origin git@github.com:qianukj/aideadmin-skill.git
+git remote add origin https://github.com/qianukj/aideadmin.git
 git push -u origin main
 ```
 
